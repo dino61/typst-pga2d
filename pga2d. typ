@@ -1,0 +1,335 @@
+//--- generated code: CodeGenGA-typ.js ---//
+
+// Pga2d code
+#let ga = (
+    pqr: (2,0,1),
+    basisNames: ("","e0","e1","e2","e01","e20","e12","e012"),
+    idx: (s:0, e0:1, e1:2, e2:3, e01:4, e20:5, e12:6, e012:7, I:7, O:6),
+  )
+  
+#let scalar(mv, name: auto) = { // scalar(a,'e01')
+  if (name == auto) {return mv.at(0)}
+  mv.at(ga.idx.at(name))
+}
+
+// Geometric Product: Mul
+#let gp(a,b) = {
+  let (a0,a1,a2,a3,a4,a5,a6,a7) = a
+  let (b0,b1,b2,b3,b4,b5,b6,b7) = b
+  let r0 = a0*b0 + a2*b2 + a3*b3 - a6*b6
+  let r1 = a0*b1 + a1*b0 - a2*b4 + a3*b5 + a4*b2 - a5*b3 - a6*b7 - a7*b6
+  let r2 = a0*b2 + a2*b0 - a3*b6 + a6*b3
+  let r3 = a0*b3 + a2*b6 + a3*b0 - a6*b2
+  let r4 = a0*b4 + a1*b2 - a2*b1 + a3*b7 + a4*b0 + a5*b6 - a6*b5 + a7*b3
+  let r5 = a0*b5 - a1*b3 + a2*b7 + a3*b1 - a4*b6 + a5*b0 + a6*b4 + a7*b2
+  let r6 = a0*b6 + a2*b3 - a3*b2 + a6*b0
+  let r7 = a0*b7 + a1*b6 + a2*b5 + a3*b4 + a4*b3 + a5*b2 + a6*b1 + a7*b0
+  (r0,r1,r2,r3,r4,r5,r6,r7)
+}
+// Wedge Product: Wedge
+#let wp(a,b) = {
+  let (a0,a1,a2,a3,a4,a5,a6,a7) = a
+  let (b0,b1,b2,b3,b4,b5,b6,b7) = b
+  let r0 = a0*b0
+  let r1 = a0*b1 + a1*b0
+  let r2 = a0*b2 + a2*b0
+  let r3 = a0*b3 + a3*b0
+  let r4 = a0*b4 + a1*b2 - a2*b1 + a4*b0
+  let r5 = a0*b5 - a1*b3 + a3*b1 + a5*b0
+  let r6 = a0*b6 + a2*b3 - a3*b2 + a6*b0
+  let r7 = a0*b7 + a1*b6 + a2*b5 + a3*b4 + a4*b3 + a5*b2 + a6*b1 + a7*b0
+  (r0,r1,r2,r3,r4,r5,r6,r7)
+}
+// Regressive Product: Vee
+#let rp(a,b) = {
+  let (a0,a1,a2,a3,a4,a5,a6,a7) = a
+  let (b0,b1,b2,b3,b4,b5,b6,b7) = b
+  let r0 = a0*b7 + a1*b6 + a2*b5 + a3*b4 + a4*b3 + a5*b2 + a6*b1 + a7*b0
+  let r1 = a1*b7 + a4*b5 - a5*b4 + a7*b1
+  let r2 = a2*b7 - a4*b6 + a6*b4 + a7*b2
+  let r3 = a3*b7 + a5*b6 - a6*b5 + a7*b3
+  let r4 = a4*b7 + a7*b4
+  let r5 = a5*b7 + a7*b5
+  let r6 = a6*b7 + a7*b6
+  let r7 = a7*b7
+  (r0,r1,r2,r3,r4,r5,r6,r7)
+}
+// Dot Product: Dot
+#let dp(a,b) = {
+  let (a0,a1,a2,a3,a4,a5,a6,a7) = a
+  let (b0,b1,b2,b3,b4,b5,b6,b7) = b
+  let r0 = a0*b0 + a2*b2 + a3*b3 - a6*b6
+  let r1 = a0*b1 + a1*b0 - a2*b4 + a3*b5 + a4*b2 - a5*b3 - a6*b7 - a7*b6
+  let r2 = a0*b2 + a2*b0 - a3*b6 + a6*b3
+  let r3 = a0*b3 + a2*b6 + a3*b0 - a6*b2
+  let r4 = a0*b4 + a3*b7 + a4*b0 + a7*b3
+  let r5 = a0*b5 + a2*b7 + a5*b0 + a7*b2
+  let r6 = a0*b6 + a6*b0
+  let r7 = a0*b7 + a7*b0
+  (r0,r1,r2,r3,r4,r5,r6,r7)
+}
+// Left Contraction: LDot
+#let lp(a,b) = {
+  let (a0,a1,a2,a3,a4,a5,a6,a7) = a
+  let (b0,b1,b2,b3,b4,b5,b6,b7) = b
+  let r0 = a0*b0 + a2*b2 + a3*b3 - a6*b6
+  let r1 = a0*b1 - a2*b4 + a3*b5 - a6*b7
+  let r2 = a0*b2 - a3*b6
+  let r3 = a0*b3 + a2*b6
+  let r4 = a0*b4 + a3*b7
+  let r5 = a0*b5 + a2*b7
+  let r6 = a0*b6
+  let r7 = a0*b7
+  (r0,r1,r2,r3,r4,r5,r6,r7)
+}
+// Commutator Product
+#let cop(a,b) = {
+  let (a0,a1,a2,a3,a4,a5,a6,a7) = a
+  let (b0,b1,b2,b3,b4,b5,b6,b7) = b
+  let r0 = 0
+  let r1 = -a2*b4 + a3*b5 + a4*b2 - a5*b3
+  let r2 = -a3*b6 + a6*b3
+  let r3 = a2*b6 - a6*b2
+  let r4 = a1*b2 - a2*b1 + a5*b6 - a6*b5
+  let r5 = -a1*b3 + a3*b1 - a4*b6 + a6*b4
+  let r6 = a2*b3 - a3*b2
+  let r7 = 0
+  (r0,r1,r2,r3,r4,r5,r6,r7)
+}
+// mv * scalar
+#let muls(a,b0) = {
+  let (a0,a1,a2,a3,a4,a5,a6,a7) = a
+  let r0 = a0*b0
+  let r1 = a1*b0
+  let r2 = a2*b0
+  let r3 = a3*b0
+  let r4 = a4*b0
+  let r5 = a5*b0
+  let r6 = a6*b0
+  let r7 = a7*b0
+  (r0,r1,r2,r3,r4,r5,r6,r7)
+}
+// mv + mv
+#let add(a,b) = {
+  let (a0,a1,a2,a3,a4,a5,a6,a7) = a
+  let (b0,b1,b2,b3,b4,b5,b6,b7) = b
+  let r0 = a0 + b0
+  let r1 = a1 + b1
+  let r2 = a2 + b2
+  let r3 = a3 + b3
+  let r4 = a4 + b4
+  let r5 = a5 + b5
+  let r6 = a6 + b6
+  let r7 = a7 + b7
+  (r0,r1,r2,r3,r4,r5,r6,r7)
+}
+// mv - mv
+#let sub(a,b) = {
+  let (a0,a1,a2,a3,a4,a5,a6,a7) = a
+  let (b0,b1,b2,b3,b4,b5,b6,b7) = b
+  let r0 = a0 - b0
+  let r1 = a1 - b1
+  let r2 = a2 - b2
+  let r3 = a3 - b3
+  let r4 = a4 - b4
+  let r5 = a5 - b5
+  let r6 = a6 - b6
+  let r7 = a7 - b7
+  (r0,r1,r2,r3,r4,r5,r6,r7)
+}
+// mv + scalar
+#let adds(a,b0) = {
+  let (a0,a1,a2,a3,a4,a5,a6,a7) = a
+  let r0 = a0 + b0
+  let r1 = a1
+  let r2 = a2
+  let r3 = a3
+  let r4 = a4
+  let r5 = a5
+  let r6 = a6
+  let r7 = a7
+  (r0,r1,r2,r3,r4,r5,r6,r7)
+}
+// mv - scalar
+#let subs(a,b0) = {
+  let (a0,a1,a2,a3,a4,a5,a6,a7) = a
+  let r0 = a0 - b0
+  let r1 = a1
+  let r2 = a2
+  let r3 = a3
+  let r4 = a4
+  let r5 = a5
+  let r6 = a6
+  let r7 = a7
+  (r0,r1,r2,r3,r4,r5,r6,r7)
+}
+// Reverse involution: Reverse
+#let rev(a) = {
+  let (a0,a1,a2,a3,a4,a5,a6,a7) = a
+  let r0 =  a0
+  let r1 =  a1
+  let r2 =  a2
+  let r3 =  a3
+  let r4 = -a4
+  let r5 = -a5
+  let r6 = -a6
+  let r7 = -a7
+  (r0,r1,r2,r3,r4,r5,r6,r7)
+}
+// Grade involution: Involute
+#let hat(a) = {
+  let (a0,a1,a2,a3,a4,a5,a6,a7) = a
+  let r0 =  a0
+  let r1 = -a1
+  let r2 = -a2
+  let r3 = -a3
+  let r4 =  a4
+  let r5 =  a5
+  let r6 =  a6
+  let r7 = -a7
+  (r0,r1,r2,r3,r4,r5,r6,r7)
+}
+// Conjugate involution: Conjugate
+#let conj(a) = {
+  let (a0,a1,a2,a3,a4,a5,a6,a7) = a
+  let r0 =  a0
+  let r1 = -a1
+  let r2 = -a2
+  let r3 = -a3
+  let r4 = -a4
+  let r5 = -a5
+  let r6 = -a6
+  let r7 =  a7
+  (r0,r1,r2,r3,r4,r5,r6,r7)
+}
+// Negative involution: Negative
+#let neg(a) = {
+  let (a0,a1,a2,a3,a4,a5,a6,a7) = a
+  let r0 = -a0
+  let r1 = -a1
+  let r2 = -a2
+  let r3 = -a3
+  let r4 = -a4
+  let r5 = -a5
+  let r6 = -a6
+  let r7 = -a7
+  (r0,r1,r2,r3,r4,r5,r6,r7)
+}
+// Poincare Dual: Dual
+#let dual(a) = {
+  let (a0,a1,a2,a3,a4,a5,a6,a7) = a
+  let r0 =  a7
+  let r1 =  a6
+  let r2 =  a5
+  let r3 =  a4
+  let r4 =  a3
+  let r5 =  a2
+  let r6 =  a1
+  let r7 =  a0
+  (r0,r1,r2,r3,r4,r5,r6,r7)
+}
+// Poincare inverse Dual: UnDual
+#let idual(a) = {
+  let (a0,a1,a2,a3,a4,a5,a6,a7) = a
+  let r0 =  a7
+  let r1 =  a6
+  let r2 =  a5
+  let r3 =  a4
+  let r4 =  a3
+  let r5 =  a2
+  let r6 =  a1
+  let r7 =  a0
+  (r0,r1,r2,r3,r4,r5,r6,r7)
+}
+// Create a point from location vector
+#let point(a1,a2,a3) = {
+  let r0 = 0
+  let r1 = 0
+  let r2 = 0
+  let r3 = 0
+  let r4 =  a3
+  let r5 =  a2
+  let r6 =  a1
+  let r7 = 0
+  (r0,r1,r2,r3,r4,r5,r6,r7)
+}
+// one vector for a pga mirror or a location/translation vector
+#let vec1(a1,a2,a3) = {
+  let r0 = 0
+  let r1 =  a1
+  let r2 =  a2
+  let r3 =  a3
+  let r4 = 0
+  let r5 = 0
+  let r6 = 0
+  let r7 = 0
+  (r0,r1,r2,r3,r4,r5,r6,r7)
+}
+// extract the location vector from a pga point
+#let pvec(a) = {
+  let (a0,a1,a2,a3,a4,a5,a6,a7) = a
+  let r1 =  a6
+  let r2 =  a5
+  let r3 =  a4
+  (r1,r2,r3)
+}
+// Norm squared
+#let normsq(a) = {
+  let (a0,a1,a2,a3,a4,a5,a6,a7) = a
+  (a0*a0 + a2*a2 + a3*a3 + a6*a6)
+}
+// helpers
+// deg rsub(a,b): return b.add(a.neg()) // b-a
+// #let scalar(a) = {a.0}
+// #let normsq(a) = { scalar(gp(a,rev(a))) }
+#let norm(a) = { calc.sqrt(calc.abs(normsq(a))) }
+#let inorm(a) = { norm(dual(a)) }
+#let normalize(a) = { muls(a, 1/norm(a)) }
+#let inormalize(a) = { muls(a, 1/inorm(a)) }
+#let normpt(pt) = { muls(pt, 1/scalar(pt,name:"O")) }
+// add rotor/trans creation and sandwich product
+
+// Inverse of a multivector 
+#let inv(x) = {
+  let iv = gp( gp(conj(x),hat(x)), rev(x))
+  let xi = gp(x,iv) // should be a scalar
+  return muls(iv, 1/scalar(xi)) // normalize it
+}
+
+// run tests
+#let logerr(name,val,exp, tol: 1e-15) = {
+  let sum = 0; let n = exp.len()
+  for (a,b) in val.zip(exp) {
+    sum += (a - b)*(a - b)
+  }
+  if sum > tol*n [
+    Test: '#name' error: #sum \
+    `  val:`#val\
+    `  exp:`#exp\
+  ] else []
+}
+
+#let runTests() = {
+  let a = (2,4,6,8,-10,-12,-14,-16)
+  let b = (3,-5,-7,-9,11,13,15,-17)
+    
+  logerr("gp", gp(a,b), (102,4,10,-2,4,-8,-10,388))
+  logerr("wp", wp(a,b), (6,2,4,6,-6,-14,-10,388))
+  logerr("rp", rp(a,b), (388,14,6,10,-6,-4,-2,272))
+  logerr("dp", dp(a,b), (102,4,10,-2,0,0,-12,-82))
+  logerr("lp", lp(a,b), (102,-210,-134,72,-114,-76,30,-34))
+  logerr("add",add(a,b),(5,-1,-1,-1,1,1,1,-33))
+  logerr("sub",sub(a,b),(-1,9,13,17,-21,-25,-29,1))
+  logerr("cop",cop(a,b),(0,0,6,-8,4,-8,2,0))
+  logerr("inv",gp(a,inv(a)),(1,0,0,0,0,0,0,0))
+
+  logerr("rev" , rev(a) , (2,4,6,8,10,12,14,16))
+  logerr("hat" , hat(a) , (2,-4,-6,-8,-10,-12,-14,16))
+  logerr("conj", conj(a), (2,-4,-6,-8,10,12,14,-16))
+  logerr("neg" , neg(a) , (-2,-4,-6,-8,10,12,14,16))
+  logerr("dual", dual(a), (-16,-14,-12,-10,8,6,4,2))
+  logerr("idual", idual(a), (-16,-14,-12,-10,8,6,4,2))
+  [Ran all tests in: runTests()\ ]
+}
+
+// Pga2d code
