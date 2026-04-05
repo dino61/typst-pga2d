@@ -1,0 +1,810 @@
+//--- generated code: CodeGenGA-typ.js ---//
+
+// Pga3d code
+#let ga = (
+    pqr: (3,0,1),
+    basisNames: ("","e0","e1","e2","e3","e01","e02","e03","e12","e31","e23","e021","e013","e032","e123","e0123"),
+    idx: (s:0, e0:1, e1:2, e2:3, e3:4, e01:5, e02:6, e03:7, e12:8, e31:9, e23:10, e021:11, e013:12, e032:13, e123:14, e0123:15, I:15, O:14),
+  )
+  
+#let scalar(mv, name: auto) = { // scalar(a,'e01')
+  if (name == auto) {return mv.at(0)}
+  mv.at(ga.idx.at(name))
+}
+
+// Geometric Product: Mul
+#let gp(a,b) = {
+  let (a0,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14,a15) = a
+  let (b0,b1,b2,b3,b4,b5,b6,b7,b8,b9,b10,b11,b12,b13,b14,b15) = b
+  let r0 = a0*b0 + a2*b2 + a3*b3 + a4*b4 - a8*b8 - a9*b9 - a10*b10 - a14*b14
+  let r1 = a0*b1 + a1*b0 - a2*b5 - a3*b6 - a4*b7 + a5*b2 + a6*b3 + a7*b4 + a8*b11 + a9*b12 + a10*b13 + a11*b8 + a12*b9 + a13*b10 + a14*b15 - a15*b14
+  let r2 = a0*b2 + a2*b0 - a3*b8 + a4*b9 + a8*b3 - a9*b4 - a10*b14 - a14*b10
+  let r3 = a0*b3 + a2*b8 + a3*b0 - a4*b10 - a8*b2 - a9*b14 + a10*b4 - a14*b9
+  let r4 = a0*b4 - a2*b9 + a3*b10 + a4*b0 - a8*b14 + a9*b2 - a10*b3 - a14*b8
+  let r5 = a0*b5 + a1*b2 - a2*b1 - a3*b11 + a4*b12 + a5*b0 - a6*b8 + a7*b9 + a8*b6 - a9*b7 - a10*b15 - a11*b3 + a12*b4 + a13*b14 - a14*b13 - a15*b10
+  let r6 = a0*b6 + a1*b3 + a2*b11 - a3*b1 - a4*b13 + a5*b8 + a6*b0 - a7*b10 - a8*b5 - a9*b15 + a10*b7 + a11*b2 + a12*b14 - a13*b4 - a14*b12 - a15*b9
+  let r7 = a0*b7 + a1*b4 - a2*b12 + a3*b13 - a4*b1 - a5*b9 + a6*b10 + a7*b0 - a8*b15 + a9*b5 - a10*b6 + a11*b14 - a12*b2 + a13*b3 - a14*b11 - a15*b8
+  let r8 = a0*b8 + a2*b3 - a3*b2 + a4*b14 + a8*b0 + a9*b10 - a10*b9 + a14*b4
+  let r9 = a0*b9 - a2*b4 + a3*b14 + a4*b2 - a8*b10 + a9*b0 + a10*b8 + a14*b3
+  let r10 = a0*b10 + a2*b14 + a3*b4 - a4*b3 + a8*b9 - a9*b8 + a10*b0 + a14*b2
+  let r11 = a0*b11 - a1*b8 + a2*b6 - a3*b5 + a4*b15 - a5*b3 + a6*b2 - a7*b14 - a8*b1 + a9*b13 - a10*b12 + a11*b0 + a12*b10 - a13*b9 + a14*b7 - a15*b4
+  let r12 = a0*b12 - a1*b9 - a2*b7 + a3*b15 + a4*b5 + a5*b4 - a6*b14 - a7*b2 - a8*b13 - a9*b1 + a10*b11 - a11*b10 + a12*b0 + a13*b8 + a14*b6 - a15*b3
+  let r13 = a0*b13 - a1*b10 + a2*b15 + a3*b7 - a4*b6 - a5*b14 - a6*b4 + a7*b3 + a8*b12 - a9*b11 - a10*b1 + a11*b9 - a12*b8 + a13*b0 + a14*b5 - a15*b2
+  let r14 = a0*b14 + a2*b10 + a3*b9 + a4*b8 + a8*b4 + a9*b3 + a10*b2 + a14*b0
+  let r15 = a0*b15 + a1*b14 + a2*b13 + a3*b12 + a4*b11 + a5*b10 + a6*b9 + a7*b8 + a8*b7 + a9*b6 + a10*b5 - a11*b4 - a12*b3 - a13*b2 - a14*b1 + a15*b0
+  (r0,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12,r13,r14,r15)
+}
+// Wedge Product: Wedge
+#let wp(a,b) = {
+  let (a0,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14,a15) = a
+  let (b0,b1,b2,b3,b4,b5,b6,b7,b8,b9,b10,b11,b12,b13,b14,b15) = b
+  let r0 = a0*b0
+  let r1 = a0*b1 + a1*b0
+  let r2 = a0*b2 + a2*b0
+  let r3 = a0*b3 + a3*b0
+  let r4 = a0*b4 + a4*b0
+  let r5 = a0*b5 + a1*b2 - a2*b1 + a5*b0
+  let r6 = a0*b6 + a1*b3 - a3*b1 + a6*b0
+  let r7 = a0*b7 + a1*b4 - a4*b1 + a7*b0
+  let r8 = a0*b8 + a2*b3 - a3*b2 + a8*b0
+  let r9 = a0*b9 - a2*b4 + a4*b2 + a9*b0
+  let r10 = a0*b10 + a3*b4 - a4*b3 + a10*b0
+  let r11 = a0*b11 - a1*b8 + a2*b6 - a3*b5 - a5*b3 + a6*b2 - a8*b1 + a11*b0
+  let r12 = a0*b12 - a1*b9 - a2*b7 + a4*b5 + a5*b4 - a7*b2 - a9*b1 + a12*b0
+  let r13 = a0*b13 - a1*b10 + a3*b7 - a4*b6 - a6*b4 + a7*b3 - a10*b1 + a13*b0
+  let r14 = a0*b14 + a2*b10 + a3*b9 + a4*b8 + a8*b4 + a9*b3 + a10*b2 + a14*b0
+  let r15 = a0*b15 + a1*b14 + a2*b13 + a3*b12 + a4*b11 + a5*b10 + a6*b9 + a7*b8 + a8*b7 + a9*b6 + a10*b5 - a11*b4 - a12*b3 - a13*b2 - a14*b1 + a15*b0
+  (r0,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12,r13,r14,r15)
+}
+// Regressive Product: Vee
+#let rp(a,b) = {
+  let (a0,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14,a15) = a
+  let (b0,b1,b2,b3,b4,b5,b6,b7,b8,b9,b10,b11,b12,b13,b14,b15) = b
+  let r0 = a0*b15 - a1*b14 - a2*b13 - a3*b12 - a4*b11 + a5*b10 + a6*b9 + a7*b8 + a8*b7 + a9*b6 + a10*b5 + a11*b4 + a12*b3 + a13*b2 + a14*b1 + a15*b0
+  let r1 = a1*b15 - a5*b13 - a6*b12 - a7*b11 - a11*b7 - a12*b6 - a13*b5 + a15*b1
+  let r2 = a2*b15 + a5*b14 - a8*b12 + a9*b11 + a11*b9 - a12*b8 + a14*b5 + a15*b2
+  let r3 = a3*b15 + a6*b14 + a8*b13 - a10*b11 - a11*b10 + a13*b8 + a14*b6 + a15*b3
+  let r4 = a4*b15 + a7*b14 - a9*b13 + a10*b12 + a12*b10 - a13*b9 + a14*b7 + a15*b4
+  let r5 = a5*b15 + a11*b12 - a12*b11 + a15*b5
+  let r6 = a6*b15 - a11*b13 + a13*b11 + a15*b6
+  let r7 = a7*b15 + a12*b13 - a13*b12 + a15*b7
+  let r8 = a8*b15 + a11*b14 - a14*b11 + a15*b8
+  let r9 = a9*b15 + a12*b14 - a14*b12 + a15*b9
+  let r10 = a10*b15 + a13*b14 - a14*b13 + a15*b10
+  let r11 = a11*b15 + a15*b11
+  let r12 = a12*b15 + a15*b12
+  let r13 = a13*b15 + a15*b13
+  let r14 = a14*b15 + a15*b14
+  let r15 = a15*b15
+  (r0,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12,r13,r14,r15)
+}
+// Dot Product: Dot
+#let dp(a,b) = {
+  let (a0,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14,a15) = a
+  let (b0,b1,b2,b3,b4,b5,b6,b7,b8,b9,b10,b11,b12,b13,b14,b15) = b
+  let r0 = a0*b0 + a2*b2 + a3*b3 + a4*b4 - a8*b8 - a9*b9 - a10*b10 - a14*b14
+  let r1 = a0*b1 + a1*b0 - a2*b5 - a3*b6 - a4*b7 + a5*b2 + a6*b3 + a7*b4 + a8*b11 + a9*b12 + a10*b13 + a11*b8 + a12*b9 + a13*b10 + a14*b15 - a15*b14
+  let r2 = a0*b2 + a2*b0 - a3*b8 + a4*b9 + a8*b3 - a9*b4 - a10*b14 - a14*b10
+  let r3 = a0*b3 + a2*b8 + a3*b0 - a4*b10 - a8*b2 - a9*b14 + a10*b4 - a14*b9
+  let r4 = a0*b4 - a2*b9 + a3*b10 + a4*b0 - a8*b14 + a9*b2 - a10*b3 - a14*b8
+  let r5 = a0*b5 - a3*b11 + a4*b12 + a5*b0 - a10*b15 - a11*b3 + a12*b4 - a15*b10
+  let r6 = a0*b6 + a2*b11 - a4*b13 + a6*b0 - a9*b15 + a11*b2 - a13*b4 - a15*b9
+  let r7 = a0*b7 - a2*b12 + a3*b13 + a7*b0 - a8*b15 - a12*b2 + a13*b3 - a15*b8
+  let r8 = a0*b8 + a4*b14 + a8*b0 + a14*b4
+  let r9 = a0*b9 + a3*b14 + a9*b0 + a14*b3
+  let r10 = a0*b10 + a2*b14 + a10*b0 + a14*b2
+  let r11 = a0*b11 + a4*b15 + a11*b0 - a15*b4
+  let r12 = a0*b12 + a3*b15 + a12*b0 - a15*b3
+  let r13 = a0*b13 + a2*b15 + a13*b0 - a15*b2
+  let r14 = a0*b14 + a14*b0
+  let r15 = a0*b15 + a15*b0
+  (r0,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12,r13,r14,r15)
+}
+// Left Contraction: LDot
+#let lp(a,b) = {
+  let (a0,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14,a15) = a
+  let (b0,b1,b2,b3,b4,b5,b6,b7,b8,b9,b10,b11,b12,b13,b14,b15) = b
+  let r0 = a0*b0 + a2*b2 + a3*b3 + a4*b4 - a8*b8 - a9*b9 - a10*b10 - a14*b14
+  let r1 = a0*b1 - a2*b5 - a3*b6 - a4*b7 + a8*b11 + a9*b12 + a10*b13 + a14*b15
+  let r2 = a0*b2 - a3*b8 + a4*b9 - a10*b14
+  let r3 = a0*b3 + a2*b8 - a4*b10 - a9*b14
+  let r4 = a0*b4 - a2*b9 + a3*b10 - a8*b14
+  let r5 = a0*b5 - a3*b11 + a4*b12 - a10*b15
+  let r6 = a0*b6 + a2*b11 - a4*b13 - a9*b15
+  let r7 = a0*b7 - a2*b12 + a3*b13 - a8*b15
+  let r8 = a0*b8 + a4*b14
+  let r9 = a0*b9 + a3*b14
+  let r10 = a0*b10 + a2*b14
+  let r11 = a0*b11 + a4*b15
+  let r12 = a0*b12 + a3*b15
+  let r13 = a0*b13 + a2*b15
+  let r14 = a0*b14
+  let r15 = a0*b15
+  (r0,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12,r13,r14,r15)
+}
+// Commutator Product
+#let cop(a,b) = {
+  let (a0,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14,a15) = a
+  let (b0,b1,b2,b3,b4,b5,b6,b7,b8,b9,b10,b11,b12,b13,b14,b15) = b
+  let r0 = 0
+  let r1 = -a2*b5 - a3*b6 - a4*b7 + a5*b2 + a6*b3 + a7*b4 + a14*b15 - a15*b14
+  let r2 = -a3*b8 + a4*b9 + a8*b3 - a9*b4
+  let r3 = a2*b8 - a4*b10 - a8*b2 + a10*b4
+  let r4 = -a2*b9 + a3*b10 + a9*b2 - a10*b3
+  let r5 = a1*b2 - a2*b1 - a6*b8 + a7*b9 + a8*b6 - a9*b7 + a13*b14 - a14*b13
+  let r6 = a1*b3 - a3*b1 + a5*b8 - a7*b10 - a8*b5 + a10*b7 + a12*b14 - a14*b12
+  let r7 = a1*b4 - a4*b1 - a5*b9 + a6*b10 + a9*b5 - a10*b6 + a11*b14 - a14*b11
+  let r8 = a2*b3 - a3*b2 + a9*b10 - a10*b9
+  let r9 = -a2*b4 + a4*b2 - a8*b10 + a10*b8
+  let r10 = a3*b4 - a4*b3 + a8*b9 - a9*b8
+  let r11 = a4*b15 - a7*b14 + a9*b13 - a10*b12 + a12*b10 - a13*b9 + a14*b7 - a15*b4
+  let r12 = a3*b15 - a6*b14 - a8*b13 + a10*b11 - a11*b10 + a13*b8 + a14*b6 - a15*b3
+  let r13 = a2*b15 - a5*b14 + a8*b12 - a9*b11 + a11*b9 - a12*b8 + a14*b5 - a15*b2
+  let r14 = 0
+  let r15 = a1*b14 + a2*b13 + a3*b12 + a4*b11 - a11*b4 - a12*b3 - a13*b2 - a14*b1
+  (r0,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12,r13,r14,r15)
+}
+// mv * scalar
+#let muls(a,b0) = {
+  let (a0,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14,a15) = a
+  let r0 = a0*b0
+  let r1 = a1*b0
+  let r2 = a2*b0
+  let r3 = a3*b0
+  let r4 = a4*b0
+  let r5 = a5*b0
+  let r6 = a6*b0
+  let r7 = a7*b0
+  let r8 = a8*b0
+  let r9 = a9*b0
+  let r10 = a10*b0
+  let r11 = a11*b0
+  let r12 = a12*b0
+  let r13 = a13*b0
+  let r14 = a14*b0
+  let r15 = a15*b0
+  (r0,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12,r13,r14,r15)
+}
+// mv + mv
+#let add(a,b) = {
+  let (a0,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14,a15) = a
+  let (b0,b1,b2,b3,b4,b5,b6,b7,b8,b9,b10,b11,b12,b13,b14,b15) = b
+  let r0 = a0 + b0
+  let r1 = a1 + b1
+  let r2 = a2 + b2
+  let r3 = a3 + b3
+  let r4 = a4 + b4
+  let r5 = a5 + b5
+  let r6 = a6 + b6
+  let r7 = a7 + b7
+  let r8 = a8 + b8
+  let r9 = a9 + b9
+  let r10 = a10 + b10
+  let r11 = a11 + b11
+  let r12 = a12 + b12
+  let r13 = a13 + b13
+  let r14 = a14 + b14
+  let r15 = a15 + b15
+  (r0,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12,r13,r14,r15)
+}
+// mv - mv
+#let sub(a,b) = {
+  let (a0,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14,a15) = a
+  let (b0,b1,b2,b3,b4,b5,b6,b7,b8,b9,b10,b11,b12,b13,b14,b15) = b
+  let r0 = a0 - b0
+  let r1 = a1 - b1
+  let r2 = a2 - b2
+  let r3 = a3 - b3
+  let r4 = a4 - b4
+  let r5 = a5 - b5
+  let r6 = a6 - b6
+  let r7 = a7 - b7
+  let r8 = a8 - b8
+  let r9 = a9 - b9
+  let r10 = a10 - b10
+  let r11 = a11 - b11
+  let r12 = a12 - b12
+  let r13 = a13 - b13
+  let r14 = a14 - b14
+  let r15 = a15 - b15
+  (r0,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12,r13,r14,r15)
+}
+// mv + scalar
+#let adds(a,b0) = {
+  let (a0,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14,a15) = a
+  let r0 = a0 + b0
+  let r1 = a1
+  let r2 = a2
+  let r3 = a3
+  let r4 = a4
+  let r5 = a5
+  let r6 = a6
+  let r7 = a7
+  let r8 = a8
+  let r9 = a9
+  let r10 = a10
+  let r11 = a11
+  let r12 = a12
+  let r13 = a13
+  let r14 = a14
+  let r15 = a15
+  (r0,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12,r13,r14,r15)
+}
+// mv - scalar
+#let subs(a,b0) = {
+  let (a0,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14,a15) = a
+  let r0 = a0 - b0
+  let r1 = a1
+  let r2 = a2
+  let r3 = a3
+  let r4 = a4
+  let r5 = a5
+  let r6 = a6
+  let r7 = a7
+  let r8 = a8
+  let r9 = a9
+  let r10 = a10
+  let r11 = a11
+  let r12 = a12
+  let r13 = a13
+  let r14 = a14
+  let r15 = a15
+  (r0,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12,r13,r14,r15)
+}
+// Reverse involution: Reverse
+#let rev(a) = {
+  let (a0,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14,a15) = a
+  let r0 =  a0
+  let r1 =  a1
+  let r2 =  a2
+  let r3 =  a3
+  let r4 =  a4
+  let r5 = -a5
+  let r6 = -a6
+  let r7 = -a7
+  let r8 = -a8
+  let r9 = -a9
+  let r10 = -a10
+  let r11 = -a11
+  let r12 = -a12
+  let r13 = -a13
+  let r14 = -a14
+  let r15 =  a15
+  (r0,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12,r13,r14,r15)
+}
+// Grade involution: Involute
+#let hat(a) = {
+  let (a0,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14,a15) = a
+  let r0 =  a0
+  let r1 = -a1
+  let r2 = -a2
+  let r3 = -a3
+  let r4 = -a4
+  let r5 =  a5
+  let r6 =  a6
+  let r7 =  a7
+  let r8 =  a8
+  let r9 =  a9
+  let r10 =  a10
+  let r11 = -a11
+  let r12 = -a12
+  let r13 = -a13
+  let r14 = -a14
+  let r15 =  a15
+  (r0,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12,r13,r14,r15)
+}
+// Conjugate involution: Conjugate
+#let conj(a) = {
+  let (a0,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14,a15) = a
+  let r0 =  a0
+  let r1 = -a1
+  let r2 = -a2
+  let r3 = -a3
+  let r4 = -a4
+  let r5 = -a5
+  let r6 = -a6
+  let r7 = -a7
+  let r8 = -a8
+  let r9 = -a9
+  let r10 = -a10
+  let r11 =  a11
+  let r12 =  a12
+  let r13 =  a13
+  let r14 =  a14
+  let r15 =  a15
+  (r0,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12,r13,r14,r15)
+}
+// Negative involution: Negative
+#let neg(a) = {
+  let (a0,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14,a15) = a
+  let r0 = -a0
+  let r1 = -a1
+  let r2 = -a2
+  let r3 = -a3
+  let r4 = -a4
+  let r5 = -a5
+  let r6 = -a6
+  let r7 = -a7
+  let r8 = -a8
+  let r9 = -a9
+  let r10 = -a10
+  let r11 = -a11
+  let r12 = -a12
+  let r13 = -a13
+  let r14 = -a14
+  let r15 = -a15
+  (r0,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12,r13,r14,r15)
+}
+// Poincare Dual: Dual
+#let dual(a) = {
+  let (a0,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14,a15) = a
+  let r0 =  a15
+  let r1 = -a14
+  let r2 = -a13
+  let r3 = -a12
+  let r4 = -a11
+  let r5 =  a10
+  let r6 =  a9
+  let r7 =  a8
+  let r8 =  a7
+  let r9 =  a6
+  let r10 =  a5
+  let r11 =  a4
+  let r12 =  a3
+  let r13 =  a2
+  let r14 =  a1
+  let r15 =  a0
+  (r0,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12,r13,r14,r15)
+}
+// Poincare inverse Dual: UnDual
+#let idual(a) = {
+  let (a0,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14,a15) = a
+  let r0 =  a15
+  let r1 =  a14
+  let r2 =  a13
+  let r3 =  a12
+  let r4 =  a11
+  let r5 =  a10
+  let r6 =  a9
+  let r7 =  a8
+  let r8 =  a7
+  let r9 =  a6
+  let r10 =  a5
+  let r11 = -a4
+  let r12 = -a3
+  let r13 = -a2
+  let r14 = -a1
+  let r15 =  a0
+  (r0,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12,r13,r14,r15)
+}
+// Negate grades 3 and 4
+#let neg34(a) = {
+  let (a0,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14,a15) = a
+  let r0 =  a0
+  let r1 =  a1
+  let r2 =  a2
+  let r3 =  a3
+  let r4 =  a4
+  let r5 =  a5
+  let r6 =  a6
+  let r7 =  a7
+  let r8 =  a8
+  let r9 =  a9
+  let r10 =  a10
+  let r11 = -a11
+  let r12 = -a12
+  let r13 = -a13
+  let r14 = -a14
+  let r15 = -a15
+  (r0,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12,r13,r14,r15)
+}
+// Create a point from location vector
+#let point(a1,a2,a3,a4) = {
+  let r0 = 0
+  let r1 = 0
+  let r2 = 0
+  let r3 = 0
+  let r4 = 0
+  let r5 = 0
+  let r6 = 0
+  let r7 = 0
+  let r8 = 0
+  let r9 = 0
+  let r10 = 0
+  let r11 =  a4
+  let r12 =  a3
+  let r13 =  a2
+  let r14 =  a1
+  let r15 = 0
+  (r0,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12,r13,r14,r15)
+}
+// extract the location vector from a pga point
+#let pvec(a) = {
+  let (a0,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14,a15) = a
+  let r1 =  a14
+  let r2 =  a13
+  let r3 =  a12
+  let r4 =  a11
+  (r1,r2,r3,r4)
+}
+// vector of grade 0
+#let vec-0(a0) = {
+  let r0 =  a0
+  let r1 = 0
+  let r2 = 0
+  let r3 = 0
+  let r4 = 0
+  let r5 = 0
+  let r6 = 0
+  let r7 = 0
+  let r8 = 0
+  let r9 = 0
+  let r10 = 0
+  let r11 = 0
+  let r12 = 0
+  let r13 = 0
+  let r14 = 0
+  let r15 = 0
+  (r0,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12,r13,r14,r15)
+}
+// vector of grade 1
+#let vec-1(a1,a2,a3,a4) = {
+  let r0 = 0
+  let r1 =  a1
+  let r2 =  a2
+  let r3 =  a3
+  let r4 =  a4
+  let r5 = 0
+  let r6 = 0
+  let r7 = 0
+  let r8 = 0
+  let r9 = 0
+  let r10 = 0
+  let r11 = 0
+  let r12 = 0
+  let r13 = 0
+  let r14 = 0
+  let r15 = 0
+  (r0,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12,r13,r14,r15)
+}
+// vector of grade 2
+#let vec-2(a5,a6,a7,a8,a9,a10) = {
+  let r0 = 0
+  let r1 = 0
+  let r2 = 0
+  let r3 = 0
+  let r4 = 0
+  let r5 =  a5
+  let r6 =  a6
+  let r7 =  a7
+  let r8 =  a8
+  let r9 =  a9
+  let r10 =  a10
+  let r11 = 0
+  let r12 = 0
+  let r13 = 0
+  let r14 = 0
+  let r15 = 0
+  (r0,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12,r13,r14,r15)
+}
+// vector of grade 3
+#let vec-3(a11,a12,a13,a14) = {
+  let r0 = 0
+  let r1 = 0
+  let r2 = 0
+  let r3 = 0
+  let r4 = 0
+  let r5 = 0
+  let r6 = 0
+  let r7 = 0
+  let r8 = 0
+  let r9 = 0
+  let r10 = 0
+  let r11 =  a11
+  let r12 =  a12
+  let r13 =  a13
+  let r14 =  a14
+  let r15 = 0
+  (r0,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12,r13,r14,r15)
+}
+// vector of grade 4
+#let vec-4(a15) = {
+  let r0 = 0
+  let r1 = 0
+  let r2 = 0
+  let r3 = 0
+  let r4 = 0
+  let r5 = 0
+  let r6 = 0
+  let r7 = 0
+  let r8 = 0
+  let r9 = 0
+  let r10 = 0
+  let r11 = 0
+  let r12 = 0
+  let r13 = 0
+  let r14 = 0
+  let r15 =  a15
+  (r0,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12,r13,r14,r15)
+}
+// even grades
+#let even(a0,a5,a6,a7,a8,a9,a10,a15) = {
+  let r0 =  a0
+  let r1 = 0
+  let r2 = 0
+  let r3 = 0
+  let r4 = 0
+  let r5 =  a5
+  let r6 =  a6
+  let r7 =  a7
+  let r8 =  a8
+  let r9 =  a9
+  let r10 =  a10
+  let r11 = 0
+  let r12 = 0
+  let r13 = 0
+  let r14 = 0
+  let r15 =  a15
+  (r0,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12,r13,r14,r15)
+}
+#let zero() = {(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)}
+#let one()  = {(1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)}
+#let sca(s)  = {(s,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)}
+#let e0(s)  = {(0,s,0,0,0,0,0,0,0,0,0,0,0,0,0,0)}
+#let e1(s)  = {(0,0,s,0,0,0,0,0,0,0,0,0,0,0,0,0)}
+#let e2(s)  = {(0,0,0,s,0,0,0,0,0,0,0,0,0,0,0,0)}
+#let e3(s)  = {(0,0,0,0,s,0,0,0,0,0,0,0,0,0,0,0)}
+#let e01(s)  = {(0,0,0,0,0,s,0,0,0,0,0,0,0,0,0,0)}
+#let e02(s)  = {(0,0,0,0,0,0,s,0,0,0,0,0,0,0,0,0)}
+#let e03(s)  = {(0,0,0,0,0,0,0,s,0,0,0,0,0,0,0,0)}
+#let e12(s)  = {(0,0,0,0,0,0,0,0,s,0,0,0,0,0,0,0)}
+#let e31(s)  = {(0,0,0,0,0,0,0,0,0,s,0,0,0,0,0,0)}
+#let e23(s)  = {(0,0,0,0,0,0,0,0,0,0,s,0,0,0,0,0)}
+#let e021(s)  = {(0,0,0,0,0,0,0,0,0,0,0,s,0,0,0,0)}
+#let e013(s)  = {(0,0,0,0,0,0,0,0,0,0,0,0,s,0,0,0)}
+#let e032(s)  = {(0,0,0,0,0,0,0,0,0,0,0,0,0,s,0,0)}
+#let e123(s)  = {(0,0,0,0,0,0,0,0,0,0,0,0,0,0,s,0)}
+#let e0123(s)  = {(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,s)}
+// select grade 0
+#let grade-0(a) = {
+  let (a0,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14,a15) = a
+  let r0 =  a0
+  let r1 = 0
+  let r2 = 0
+  let r3 = 0
+  let r4 = 0
+  let r5 = 0
+  let r6 = 0
+  let r7 = 0
+  let r8 = 0
+  let r9 = 0
+  let r10 = 0
+  let r11 = 0
+  let r12 = 0
+  let r13 = 0
+  let r14 = 0
+  let r15 = 0
+  (r0,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12,r13,r14,r15)
+}
+// select grade 1
+#let grade-1(a) = {
+  let (a0,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14,a15) = a
+  let r0 = 0
+  let r1 =  a1
+  let r2 =  a2
+  let r3 =  a3
+  let r4 =  a4
+  let r5 = 0
+  let r6 = 0
+  let r7 = 0
+  let r8 = 0
+  let r9 = 0
+  let r10 = 0
+  let r11 = 0
+  let r12 = 0
+  let r13 = 0
+  let r14 = 0
+  let r15 = 0
+  (r0,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12,r13,r14,r15)
+}
+// select grade 2
+#let grade-2(a) = {
+  let (a0,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14,a15) = a
+  let r0 = 0
+  let r1 = 0
+  let r2 = 0
+  let r3 = 0
+  let r4 = 0
+  let r5 =  a5
+  let r6 =  a6
+  let r7 =  a7
+  let r8 =  a8
+  let r9 =  a9
+  let r10 =  a10
+  let r11 = 0
+  let r12 = 0
+  let r13 = 0
+  let r14 = 0
+  let r15 = 0
+  (r0,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12,r13,r14,r15)
+}
+// select grade 3
+#let grade-3(a) = {
+  let (a0,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14,a15) = a
+  let r0 = 0
+  let r1 = 0
+  let r2 = 0
+  let r3 = 0
+  let r4 = 0
+  let r5 = 0
+  let r6 = 0
+  let r7 = 0
+  let r8 = 0
+  let r9 = 0
+  let r10 = 0
+  let r11 =  a11
+  let r12 =  a12
+  let r13 =  a13
+  let r14 =  a14
+  let r15 = 0
+  (r0,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12,r13,r14,r15)
+}
+// select grade 4
+#let grade-4(a) = {
+  let (a0,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14,a15) = a
+  let r0 = 0
+  let r1 = 0
+  let r2 = 0
+  let r3 = 0
+  let r4 = 0
+  let r5 = 0
+  let r6 = 0
+  let r7 = 0
+  let r8 = 0
+  let r9 = 0
+  let r10 = 0
+  let r11 = 0
+  let r12 = 0
+  let r13 = 0
+  let r14 = 0
+  let r15 =  a15
+  (r0,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12,r13,r14,r15)
+}
+// select even grade
+#let grade-even(a) = {
+  let (a0,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14,a15) = a
+  let r0 =  a0
+  let r1 = 0
+  let r2 = 0
+  let r3 = 0
+  let r4 = 0
+  let r5 =  a5
+  let r6 =  a6
+  let r7 =  a7
+  let r8 =  a8
+  let r9 =  a9
+  let r10 =  a10
+  let r11 = 0
+  let r12 = 0
+  let r13 = 0
+  let r14 = 0
+  let r15 =  a15
+  (r0,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12,r13,r14,r15)
+}
+// (1-t)mv + t*mv
+#let affine(a,b,t) = {
+  let (a0,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14,a15) = a
+  let (b0,b1,b2,b3,b4,b5,b6,b7,b8,b9,b10,b11,b12,b13,b14,b15) = b
+  let s = (1 - t)
+  let r0 = s*a0 + t*b0
+  let r1 = s*a1 + t*b1
+  let r2 = s*a2 + t*b2
+  let r3 = s*a3 + t*b3
+  let r4 = s*a4 + t*b4
+  let r5 = s*a5 + t*b5
+  let r6 = s*a6 + t*b6
+  let r7 = s*a7 + t*b7
+  let r8 = s*a8 + t*b8
+  let r9 = s*a9 + t*b9
+  let r10 = s*a10 + t*b10
+  let r11 = s*a11 + t*b11
+  let r12 = s*a12 + t*b12
+  let r13 = s*a13 + t*b13
+  let r14 = s*a14 + t*b14
+  let r15 = s*a15 + t*b15
+  (r0,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12,r13,r14,r15)
+}
+// a + bi*e0
+#let adde0(a,b1) = {
+  let (a0,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14,a15) = a
+  let r0 = a0
+  let r1 = a1 + b1
+  let r2 = a2
+  let r3 = a3
+  let r4 = a4
+  let r5 = a5
+  let r6 = a6
+  let r7 = a7
+  let r8 = a8
+  let r9 = a9
+  let r10 = a10
+  let r11 = a11
+  let r12 = a12
+  let r13 = a13
+  let r14 = a14
+  let r15 = a15
+  (r0,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12,r13,r14,r15)
+}
+// Norm squared
+#let normsq(a) = {
+  let (a0,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14,a15) = a
+  (a0*a0 + a2*a2 + a3*a3 + a4*a4 + a8*a8 + a9*a9 + a10*a10 + a14*a14)
+}
+// helpers
+// deg rsub(a,b): return b.add(a.neg()) // b-a
+// #let scalar(a) = {a.0}
+// #let normsq(a) = { scalar(gp(a,rev(a))) }
+#let norm(a) = { calc.sqrt(calc.abs(normsq(a))) }
+#let inorm(a) = { norm(dual(a)) }
+#let normalize(a) = { muls(a, 1/norm(a)) }
+#let inormalize(a) = { muls(a, 1/inorm(a)) }
+#let normr(r,a) = { muls(a, r/norm(a)) }
+#let inormr(r,a) = { muls(a, r/inorm(a)) }
+#let normpt(pt) = { muls(pt, 1/scalar(pt,name:"O")) }
+
+// Taylor expansion of exp(B)
+#let texp(B) = {
+  let (R,C,f) = (vec-0(1),B,1)
+  for i in range(20) {
+    R = add(R,muls(C,1/f))
+    C = gp(C,B)
+    f = f * (i+2)
+  }
+  R
+}
+
+// Inverse of a multivector 
+#let inv(x) = {
+  let xc = conj(x)
+  let xn = neg34(gp(x,xc))
+  let iv = gp(xc,xn)
+  let xi = gp(x,iv) // should be a scalar
+  muls(iv,1/scalar(xi)) // normalize it
+}
+
+// run tests
+#let logerr(name,val,exp, tol: 1e-15) = {
+  let sum = 0; let n = exp.len()
+  for (a,b) in val.zip(exp) {
+    sum += (a - b)*(a - b)
+  }
+  if sum > tol*n [
+    Test: '#name' error: #sum \
+    `  val:`#val\
+    `  exp:`#exp\
+  ] else []
+}
+#let runTests() = {
+  let a = (2,4,6,8,10,-12,-14,-16,-18,-20,-22,-24,-26,-28,-30,32)
+  let b = (3,-5,-7,-9,-11,13,15,17,19,21,23,-25,-27,-29,-31,33)
+    
+  logerr("gp", gp(a,b), (120,4,12,16,20,-20,-24,-28,8,-4,8,-660,-552,-732,876,-3212))
+  logerr("wp", wp(a,b), (6,2,4,6,8,-8,-8,-8,-14,-22,-18,-312,-268,-368,876,-3212))
+  logerr("rp", rp(a,b), (4,8,-40,-48,-32,18,22,14,8,8,8,-1592,-1722,-1852,-1982,1056))
+  logerr("dp", dp(a,b), (120,4,12,16,20,-20,-24,-28,4,4,4,560,420,280,-152,162))
+  logerr("lp", lp(a,b), (120,260,-638,-754,-522,682,830,558,-272,-206,-140,280,210,140,-62,66))
+  logerr("add",add(a,b),(5,-1,-1,-1,-1,1,1,1,1,1,1,-49,-53,-57,-61,65))
+  logerr("sub",sub(a,b),(-1,9,13,17,21,-25,-29,-33,-37,-41,-45,1,1,1,1,-1))
+  logerr("cop",cop(a,b),(0,20,0,0,0,0,0,0,4,-8,4,-348,-284,-364,0,-1608))
+  logerr("inv",gp(a,inv(a)),(1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0))
+
+  logerr("rev" , rev(a) , (2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32))
+  logerr("hat" , hat(a) , (2,-4,-6,-8,-10,-12,-14,-16,-18,-20,-22,24,26,28,30,32))
+  logerr("conj", conj(a), (2,-4,-6,-8,-10,12,14,16,18,20,22,-24,-26,-28,-30,32))
+  logerr("neg" , neg(a) , (-2,-4,-6,-8,-10,12,14,16,18,20,22,24,26,28,30,-32))
+  logerr("dual", dual(a), (32,30,28,26,24,-22,-20,-18,-16,-14,-12,10,8,6,4,2))
+  logerr("idual", idual(a), (32,-30,-28,-26,-24,-22,-20,-18,-16,-14,-12,-10,-8,-6,-4,2))
+  [Ran all tests in: runTests()\ ]
+}
+
+// Pga3d code
