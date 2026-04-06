@@ -1,4 +1,4 @@
-This repo contains a **Tpst** code library for implementing Plane-based Geometric Algebra (**PGA**) in 2D and 3D.
+This repo contains a **Typst** code library for implementing Plane-based Geometric Algebra (**PGA**) in 2D and 3D.
 See: https://bivector.net and: https://typst.app/docs/
 
 I'm writing a document using Typst that will be an elementary introduction to Geometric Algebra assuming the
